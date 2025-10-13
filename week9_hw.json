@@ -1,0 +1,122 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "Tourist Arrivals by States and Federal Territories in Malaysia",
+  "width": 800,
+  "height": 400,
+
+  "view": {"stroke": "transparent", "fill": "#eaf4fc"},
+
+  "layer": [
+    {
+      "data": {"graticule": {"step": [2, 2], "extent": [[98, -2], [122, 10]]}},
+      "mark": {"type": "geoshape", "stroke": "#ffffff", "strokeWidth": 0.5}
+    },
+    {
+
+      "data": {
+        "url": "https://10000001x.github.io/3179_HW9/ne_1.json",
+        "format": {
+          "type": "topojson",
+          "feature": "ne_10m_admin_1_states_provinces"  
+        }
+      },
+      "transform": [
+        {
+          "lookup": "properties.name", 
+          "from": {
+            "data": {"url": "https://10000001x.github.io/3179_HW9/arrivals_by_state.csv"},
+            "key": "soe",                
+            "fields": ["total_arrivals"]
+          }
+        },
+        {
+            "calculate": "toNumber(datum.total_arrivals)",
+            "as": "arrivals_num"
+        },
+        {
+            "calculate": "log(datum.total_arrivals + 1)",
+            "as": "log_arrivals"
+        },
+        {
+            "window": [
+            {"op": "min", "field": "log_arrivals", "as": "min_arr"},
+            {"op": "max", "field": "log_arrivals", "as": "max_arr"}
+            ],
+            "frame": [null, null]
+        },
+        {
+            "calculate": "(datum.log_arrivals - datum.min_arr) / (datum.max_arr - datum.min_arr)",
+            "as": "arrivals_norm"
+        }
+      ],
+      "mark": {"type": "geoshape"},
+      "encoding": {
+        "color": {
+          "field": "arrivals_norm",
+          "type": "quantitative",
+          "scale": {"scheme": "purples", "type": "linear"},
+          "title": "Normalized Arrivals"
+        },
+        "tooltip": [
+          {"field": "properties.name", "title": "State"},
+          {"field": "arrivals_num", "title": "Raw Arrivals"},
+          {"field": "arrivals_norm", "title": "Normalized Arrivals", "format": ".2f"},
+          {"field": "log_arrivals", "title": "Log Arrivals", "format": ".2f"}
+        ]
+      },
+      "projection": {"type": "identity", "reflectY": true}
+    },
+    {
+      "data": {
+        "url": "https://10000001x.github.io/3179_HW9/ne_1.json",
+        "format": {
+          "type": "topojson",
+          "feature": "ne_10m_admin_1_states_provinces"
+        }
+      },
+      "transform": [
+        {
+          "lookup": "properties.name",
+          "from": {
+            "data": {
+              "url": "https://10000001x.github.io/3179_HW9/arrivals_by_state.csv"
+            },
+            "key": "soe",
+            "fields": ["total_arrivals"]
+          }
+        },
+        { "calculate": "toNumber(datum.total_arrivals)", "as": "arrivals_num" },
+        {
+          "window": [{ "op": "rank", "as": "rank" }],
+          "sort": [{ "field": "arrivals_num", "order": "descending" }]
+        },
+        { "filter": "datum.rank <= 3" }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "stroke": "#ff6b6b",
+        "strokeWidth": 2,
+        "fill": null
+      },
+      "projection": { "type": "identity", "reflectY": true }
+    },
+    {
+      "data": {"values": [{}]},
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "baseline": "bottom",
+        "dx": -10,
+        "dy": -10,
+        "fontSize": 12,
+        "fontStyle": "italic",
+        "fill": "#555"
+      },
+      "encoding": {
+        "x": { "value": 800 },
+        "y": { "value": 400 },
+        "text": {"value": "Top 3 states are outlined in red borders"}
+      }
+    }
+  ]
+}

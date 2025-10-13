@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tourism in Malaysia</title>
+
+  <!-- Vega & Vega-Lite -->
+  <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+
+  <style>
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background-color: #f9fafc;
+      color: #222;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 30px;
+      margin-bottom: 5px;
+      font-size: 26px;
+      font-weight: bold;
+    }
+
+    p.subtitle {
+      text-align: center;
+      color: #555;
+      font-size: 15px;
+      margin-top: 0;
+      margin-bottom: 25px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-top: 30px;
+      margin-bottom: 10px;
+      font-size: 20px;
+      color: #333;
+    }
+
+    .chart-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      margin-bottom: 40px;
+    }
+
+    .chart {
+      width: 90%;
+      max-width: 980px;
+    }
+
+    .chart-box {
+      background: #fff;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+      border-radius: 8px;
+      padding: 20px;
+    }
+
+    #msia_map, #gender_chart {
+      margin: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Tourism in Malaysia</h1>
+  <p class="subtitle">This dashboard visualizes tourist arrivals in Malaysia by state and gender over time.</p>
+
+  <!-- MAP SECTION -->
+  <div class="chart-container">
+    <div id="msia_map" class="chart chart-box"></div>
+  </div>
+
+  <!-- GENDER CHART SECTION -->
+  <h2>How Tourist Arrivals Differ between Male and Female Visitors</h2>
+  <div class="chart-container">
+    <div id="gender_chart" class="chart chart-box"></div>
+  </div>
+
+  <!-- Load map -->
+  <script src="msia_map.js"></script>
+
+  <!-- Load gender chart -->
+  <script>
+    vegaEmbed("#gender_chart", "gender_chart.json", { actions: { export: true, source: true, compiled: true, editor: true } })
+      .then(() => console.log("Gender chart rendered successfully"))
+      .catch(console.error);
+  </script>
+</body>
+</html>
