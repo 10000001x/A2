@@ -1,0 +1,40 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Total Tourist Arrivals to Malaysia (2000–2020)"
+  },
+  "width": "container",
+  "height": 300,
+  "data": { "url": "social_tourism_yearly.csv" },
+  "mark": {
+    "type": "line",
+    "point": true,
+    "color": "#0077b6",
+    "strokeWidth": 3
+  },
+  "encoding": {
+    "x": {
+      "field": "Year",
+      "type": "temporal",
+      "title": "Year",
+      "axis": {"grid": false},
+      "scale": {
+        "domainMax": {"year": 2020, "month": 6}
+        }
+    },
+    "y": {
+      "field": "Total_Arrivals",
+      "type": "quantitative",
+      "title": "Total Arrivals (in millions)",
+      "axis": {"format": "~s", "grid": true, "titlePadding":10}
+    },
+    "tooltip": [
+      {"field": "Year", "type": "temporal", "timeUnit": "year"},
+      {"field": "Total_Arrivals", "type": "quantitative", "format": ","}
+    ]
+  },
+  "config": {
+    "view": {"stroke": "transparent"},
+    "axis": {"gridColor": "#e6e6e6"}
+  }
+}

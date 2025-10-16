@@ -1,0 +1,39 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": {
+        "text": "Top 5 Tourist Source Countries to Malaysia (2000-2020)"
+    },
+    "width": "container",
+    "height": 300,
+    "data": { "url": "social_tourism_top5.csv" },
+    "mark": { "type": "bar", "cornerRadiusEnd": 3, "opacity": 0.9 },
+    "encoding": {
+        "y": {
+            "field": "Total_Arrivals",
+            "type": "quantitative",
+            "title": "Total Arrivals (in millions)",
+            "axis": {"grid": false, "format": "~s", "titlePadding":10}
+        },
+        "x": {
+            "field": "Country",
+            "type": "nominal",
+            "sort": "-y",
+            "title": "Country",
+            "axis": {"labelAngle": 360, "labelFontSize": 11}
+        },
+        "color": {
+            "field": "Country",
+            "type": "nominal",
+            "title": "Country",
+            "legend": null
+        },
+        "tooltip": [
+            {"field": "Country", "type": "nominal"},
+            {"field": "Total_Arrivals", "type": "quantitative", "format": ","}
+        ]
+    },
+    "config": {
+         "axis": {"grid": false},
+         "view": {"stroke": "transparent"}
+    }
+}

@@ -3,8 +3,8 @@
   "title": {
     "text": "Tourist Arrivals by State and Gender"
   },
-  "width": 700,
-  "height": 400,
+  "width": "container",
+  "height": 200,
   "data": { "url": "arrivals_gender_by_state.csv" },
   "params": [
     {
@@ -41,7 +41,7 @@
           "aggregate": "sum",
           "title": "Total Arrivals (visitors)",
           "stack": null,
-          "axis": { "titleFontSize": 12 }
+          "axis": { "titleFontSize": 12, "format": "~s" }
         },
         "xOffset": { "field": "gender" },
         "color": {
@@ -51,17 +51,12 @@
             "domain": ["female", "male"],
             "range": ["#eb6eb3", "#6ea8eb"]
           },
-          "title": "Gender",
-          "legend": {
-            "orient": "right",
-            "titleFontSize": 12,
-            "labelFontSize": 11
-          }
+          "legend":null
         },
         "tooltip": [
           { "field": "soe", "title": "State" },
           { "field": "gender", "title": "Gender" },
-          { "aggregate": "sum", "field": "arrivals", "title": "Arrivals" }
+          { "aggregate": "sum", "field": "arrivals", "title": "Arrivals", "format": "," }
         ]
       }
     },

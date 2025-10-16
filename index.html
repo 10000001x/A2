@@ -37,12 +37,13 @@
 
     h2 {
       text-align: center;
-      margin-top: 30px;
-      margin-bottom: 10px;
+      margin-top: 40px;
+      margin-bottom: 15px;
       font-size: 20px;
       color: #333;
     }
 
+    /* --- Map Section --- */
     .chart-container {
       display: flex;
       justify-content: center;
@@ -51,46 +52,124 @@
       margin-bottom: 40px;
     }
 
-    .chart {
-      width: 90%;
-      max-width: 980px;
-    }
-
     .chart-box {
       background: #fff;
       box-shadow: 0 3px 10px rgba(0,0,0,0.08);
       border-radius: 8px;
       padding: 20px;
+      width: 90%;
+      max-width: 980px;
     }
 
-    #msia_map, #gender_chart {
-      margin: auto;
+    /* --- Dual Chart Layout --- */
+    .dual-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: stretch;
+      width: 90%; /* compensates for internal gap so edges align with map */
+      max-width: 980px;
+      margin: 0 auto 50px;
+      gap: 25px; /* spacing between two boxes */
+    }
+
+    /* Chart box styling */
+    .chart-dual-box {
+      flex: 1; /* evenly divides total width including the gap */
+      background: #fff;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+      border-radius: 8px;
+      padding: 15px;
+      height: 480px; /* Equal height for all boxes */
+      display: flex;
+      align-items: center;
+      justify-content: center;     
+      box-sizing: border-box;
+    }
+
+    /* IDs within dual charts */
+    #donut_chart, #gender_chart, #top5_chart, #yearly_trend_chart {
+      width: 100%;
+      height: 100%;
+      max-width: 100%;
+    }
+
+    /* --- Responsive --- */
+    @media (max-width: 900px) {
+      .dual-container {
+        flex-direction: column;
+        align-items: center;
+      }
+      .chart-dual-box {
+        width: 100%;
+        height: auto;
+      }
     }
   </style>
 </head>
 
 <body>
   <h1>Tourism in Malaysia</h1>
-  <p class="subtitle">This dashboard visualizes tourist arrivals in Malaysia by state and gender over time.</p>
+  <p class="subtitle">This dashboard visualizes tourist arrivals in Malaysia from different aspects.</p>
 
   <!-- MAP SECTION -->
   <div class="chart-container">
-    <div id="msia_map" class="chart chart-box"></div>
+    <div id="msia_map" class="chart-box"></div>
   </div>
 
-  <!-- GENDER CHART SECTION -->
-  <h2>How Tourist Arrivals Differ between Male and Female Visitors</h2>
-  <div class="chart-container">
-    <div id="gender_chart" class="chart chart-box"></div>
+  <!-- FIRST DUAL CHART SECTION (Donut + Gender) -->
+  <h2>Tourist Arrivals Differ between Male and Female Visitors</h2>
+  <div class="dual-container">
+    <div id="donut_chart" class="chart-dual-box"></div>
+    <div id="gender_chart" class="chart-dual-box"></div>
   </div>
 
-  <!-- Load map -->
+  <!-- SECOND DUAL CHART SECTION (Top 5 + Yearly Trend) -->
+  <h2>Top 5 Tourist States and Yearly Arrival Trends</h2>
+  <div class="dual-container">
+    <div id="top5_chart" class="chart-dual-box"></div>
+    <div id="yearly_trend_chart" class="chart-dual-box"></div>
+  </div>
+
+  <!-- Load Map -->
   <script src="msia_map.js"></script>
 
-  <!-- Load gender chart -->
+  <!-- Donut Chart -->
   <script>
-    vegaEmbed("#gender_chart", "gender_chart.json", { actions: { export: true, source: true, compiled: true, editor: true } })
+    vegaEmbed("#donut_chart", "donut_chart.json", {
+      actions: false,
+      renderer: "canvas"
+    })
+      .then(() => console.log("Donut chart rendered successfully"))
+      .catch(console.error);
+  </script>
+
+  <!-- Gender Bar Chart -->
+  <script>
+    vegaEmbed("#gender_chart", "gender_chart.json", {
+      actions: false,
+      renderer: "canvas"
+    })
       .then(() => console.log("Gender chart rendered successfully"))
+      .catch(console.error);
+  </script>
+
+  <!-- Top 5 Chart -->
+  <script>
+    vegaEmbed("#top5_chart", "top5_chart.json", {
+      actions: false,
+      renderer: "canvas"
+    })
+      .then(() => console.log("Top 5 chart rendered successfully"))
+      .catch(console.error);
+  </script>
+
+  <!-- Yearly Trend Chart -->
+  <script>
+    vegaEmbed("#yearly_trend_chart", "yearly_trend_chart.json", {
+      actions: false,
+      renderer: "canvas"
+    })
+      .then(() => console.log("Yearly trend chart rendered successfully"))
       .catch(console.error);
   </script>
 </body>
