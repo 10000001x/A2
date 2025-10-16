@@ -57,8 +57,13 @@
       box-shadow: 0 3px 10px rgba(0,0,0,0.08);
       border-radius: 8px;
       padding: 20px;
-      width: 90%;
-      max-width: 980px;
+      width: 90%;;
+      max-width: 980px;          
+      margin: 0 auto;
+      display: flex;     
+      place-items: center;
+      box-sizing: border-box;
+      overflow: hidden; 
     }
 
     /* --- Dual Chart Layout --- */
@@ -69,7 +74,7 @@
       width: 90%; /* compensates for internal gap so edges align with map */
       max-width: 980px;
       margin: 0 auto 50px;
-      gap: 25px; /* spacing between two boxes */
+      gap: 20px; /* spacing between two boxes */
     }
 
     /* Chart box styling */
@@ -79,18 +84,36 @@
       box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
       border-radius: 8px;
       padding: 15px;
-      height: 480px; /* Equal height for all boxes */
+      height: 400px; /* Equal height for all boxes */
       display: flex;
       align-items: center;
       justify-content: center;     
       box-sizing: border-box;
     }
 
+    .chart-wrapper {
+      width: 95%; 
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+    }
+    
     /* IDs within dual charts */
     #donut_chart, #gender_chart, #top5_chart, #yearly_trend_chart {
       width: 100%;
       height: 100%;
       max-width: 100%;
+    }
+
+
+    #msia_map {
+      width: 100%;        
+      height: auto;
+      display: flex;
+      justify-content: center; 
+      align-items: center;
     }
 
     /* --- Responsive --- */
@@ -119,16 +142,25 @@
   <!-- FIRST DUAL CHART SECTION (Donut + Gender) -->
   <h2>Tourist Arrivals Differ between Male and Female Visitors</h2>
   <div class="dual-container">
-    <div id="donut_chart" class="chart-dual-box"></div>
-    <div id="gender_chart" class="chart-dual-box"></div>
+    <div class="chart-dual-box">
+      <div class="chart-wrapper"><div id="donut_chart"></div></div>
+    </div>
+    <div class="chart-dual-box">
+      <div class="chart-wrapper"><div id="gender_chart"></div></div>
+    </div>
   </div>
 
   <!-- SECOND DUAL CHART SECTION (Top 5 + Yearly Trend) -->
   <h2>Top 5 Tourist States and Yearly Arrival Trends</h2>
   <div class="dual-container">
-    <div id="top5_chart" class="chart-dual-box"></div>
-    <div id="yearly_trend_chart" class="chart-dual-box"></div>
+    <div class="chart-dual-box">
+      <div class="chart-wrapper"><div id="top5_chart"></div></div>
+    </div>
+    <div class="chart-dual-box">
+      <div class="chart-wrapper"><div id="yearly_trend_chart"></div></div>
+    </div>
   </div>
+
 
   <!-- Load Map -->
   <script src="msia_map.js"></script>
