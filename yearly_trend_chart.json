@@ -1,40 +1,70 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": {
-    "text": "Total Tourist Arrivals to Malaysia (2000–2020)"
-  },
+  "title": { "text": "Total Tourist Arrivals to Malaysia (2000–2020)" },
   "width": "container",
   "height": 300,
   "data": { "url": "social_tourism_yearly.csv" },
-  "mark": {
-    "type": "line",
-    "point": true,
-    "color": "#0077b6",
-    "strokeWidth": 3
-  },
-  "encoding": {
-    "x": {
-      "field": "Year",
-      "type": "temporal",
-      "title": "Year",
-      "axis": {"grid": false},
-      "scale": {
-        "domainMax": {"year": 2020, "month": 6}
-        }
+  "layer": [
+    {
+      "mark": {
+        "type": "line",
+        "point": true,
+        "color": "#0077b6",
+        "strokeWidth": 3
+      },
+      "encoding": {
+        "x": {
+          "field": "Year",
+          "type": "quantitative",
+          "title": "Year",
+          "axis": { "grid": false, "tickCount": 11, "format": "d" }
+        },
+        "y": {
+          "field": "Total_Arrivals",
+          "type": "quantitative",
+          "title": "Total Arrivals (in millions)",
+          "axis": { "format": "~s", "grid": true, "titlePadding": 10 }
+        },
+        "tooltip": [
+          { "field": "Year", "type": "quantitative" },
+          { "field": "Total_Arrivals", "type": "quantitative", "format": "," }
+        ]
+      }
     },
-    "y": {
-      "field": "Total_Arrivals",
-      "type": "quantitative",
-      "title": "Total Arrivals (in millions)",
-      "axis": {"format": "~s", "grid": true, "titlePadding":10}
+
+    {
+      "mark": {
+        "type": "rule",
+        "strokeDash": [4, 4],
+        "color": "#d62828",
+        "opacity": 0.9
+      },
+      "encoding": {
+        "x": { "datum": 2019 }
+      }
     },
-    "tooltip": [
-      {"field": "Year", "type": "temporal", "timeUnit": "year"},
-      {"field": "Total_Arrivals", "type": "quantitative", "format": ","}
-    ]
-  },
+
+    {
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "dx": -10,
+        "dy": -10,
+        "fontSize": 12,
+        "fontWeight":100,
+        "font": "Arial",
+        "fontStyle":"italic",
+        "fill": "#cd4f4f"
+      },
+      "encoding": {
+          "x": {"value": 340},   
+          "y": {"value": 20}, 
+          "text": {"value": "Peaked in 2019 with 6,779,327 arrivals"}
+      }
+    }
+  ],
   "config": {
-    "view": {"stroke": "transparent"},
-    "axis": {"gridColor": "#e6e6e6"}
+    "view": { "stroke": "transparent" },
+    "axis": { "gridColor": "#e6e6e6" }
   }
 }

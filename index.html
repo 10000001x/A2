@@ -11,36 +11,56 @@
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
 
   <style>
+    /* --- Base Page --- */
     body {
       font-family: "Segoe UI", Arial, sans-serif;
-      background-color: #f9fafc;
+      background-color: #fdfbf8;
       color: #222;
       margin: 0;
       padding: 0;
     }
 
+    /* --- Outer Container --- */
+    .outer-box {
+      background: #f5f3f9; /* very light purple */
+      border-radius: 16px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+      width: 95%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 50px;
+      box-sizing: border-box;
+      border: 1px solid #e5d4ff;
+    }
+
     h1 {
       text-align: center;
-      margin-top: 30px;
+      margin-top: 10px;
       margin-bottom: 5px;
-      font-size: 26px;
+      font-size: 55px;
       font-weight: bold;
+      font-family: 'Times New Roman', Times, serif;
+      color: #2D3748;
     }
 
     p.subtitle {
-      text-align: center;
+      text-align: justify;
+      width: 90%;                        /* same width as your chart boxes */
+      max-width: 980px; 
+      margin: 0 auto 25px auto;
       color: #555;
-      font-size: 15px;
-      margin-top: 0;
-      margin-bottom: 25px;
+      font-size: 25px;
+      font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     }
 
     h2 {
       text-align: center;
-      margin-top: 40px;
-      margin-bottom: 15px;
-      font-size: 20px;
-      color: #333;
+      margin-top: 50px;
+      margin-bottom: 25px;
+      font-size: 28px;
+      font-weight: bold;
+      font-family: 'Times New Roman', Times, serif;
+      color: #2D3748;
     }
 
     /* --- Map Section --- */
@@ -49,7 +69,7 @@
       justify-content: center;
       align-items: center;
       width: 100%;
-      margin-bottom: 40px;
+      margin-bottom: 35px;
     }
 
     .chart-box {
@@ -73,8 +93,40 @@
       align-items: stretch;
       width: 90%; /* compensates for internal gap so edges align with map */
       max-width: 980px;
-      margin: 0 auto 50px;
+      margin: 0 auto 35px;
       gap: 20px; /* spacing between two boxes */
+    }
+
+
+    .footer-container {
+      width: 90%;           /* same as your chart width */
+      max-width: 980px;     /* consistent with .chart-box and .dual-container */
+      margin: 0 auto;       /* center horizontally */
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid #ccc;  /* line color */
+      width: 100%;                 /* full width inside container */
+      margin: 40px 0 15px 0;       /* spacing before & after */
+    }
+
+    .authorship {
+      font-size: 25px;
+      color: #555;
+      margin-top: 20px;
+      margin-bottom: 0px;
+      font-weight: bold;
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      text-align: center;
+    }
+
+    .info-text {
+      font-size: 22px;
+      color: #555;
+      text-align: left;
+      margin-top: 5px;
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     }
 
     /* Chart box styling */
@@ -99,9 +151,82 @@
       justify-content: center;
       box-sizing: border-box;
     }
+
+    .annotation-box-donut {
+      position: absolute;
+      bottom: -650px;                        /* adjust vertically */
+      left: 580px;                           /* adjust horizontally */
+      width: 130px;
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 0px 10px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: normal;
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      color: #555;
+      text-align: left;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+      z-index: 10;
+    }
+
+    .annotation-box-stacked {
+      position: absolute;
+      bottom: -610px;                        /* adjust vertically */
+      left: 1050px;                           /* adjust horizontally */
+      width: 140px;
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 0px 10px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: normal;
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      color: #555;
+      text-align: left;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+      z-index: 10;
+    }
+
+    .annotation-box-bar {
+      position: absolute;
+      bottom: -1180px;                        /* adjust vertically */
+      left: 580px;                           /* adjust horizontally */
+      width: 140px;
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 0px 10px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: normal;
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      color: #555;
+      text-align: left;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+      z-index: 10;
+    }
+
+    .annotation-box-line {
+      position: absolute;
+      bottom: -1300px;                        /* adjust vertically */
+      left: 1000px;                           /* adjust horizontally */
+      width: 155px;
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 0px 10px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: normal;
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      color: #555;
+      text-align: left;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+      z-index: 10;
+    }
+
     
     /* IDs within dual charts */
-    #donut_chart, #gender_chart, #top5_chart, #yearly_trend_chart {
+    #donut_chart, #top5_gender_chart, #top5_chart, #yearly_trend_chart {
       width: 100%;
       height: 100%;
       max-width: 100%;
@@ -126,39 +251,117 @@
         width: 100%;
         height: auto;
       }
+      .outer-box {
+        padding:25px 20px;
+      }
     }
   </style>
 </head>
 
 <body>
-  <h1>Tourism in Malaysia</h1>
-  <p class="subtitle">This dashboard visualizes tourist arrivals in Malaysia from different aspects.</p>
+  <div class="outer-box">
+    <h1>Tourism in Malaysia</h1>
+    <p class="subtitle">
+      Tourism plays a vital role in Malaysia's economy, culture, and regional development.
+      Over the years, the country has welcomed millions of visitors drawn by its diverse landscapes, 
+      rich heritage, and growing modern attractions. 
+      Let's begin with an overview of where tourists travel most within Malaysia!
+    </p>
 
-  <!-- MAP SECTION -->
-  <div class="chart-container">
-    <div id="msia_map" class="chart-box"></div>
-  </div>
+    <!-- MAP SECTION -->
+    <h2>Tourist Arrival Patterns Across Malaysia</h2>
+    <div class="chart-container">
+      <div id="msia_map" class="chart-box"></div>
+    </div>
+    <p class="subtitle">
+      Tourism in Malaysia remains focused on urban and coastal regions, while other areas still have room to grow.
+      States like Johor attract more tourists due to strong transport links and proximity to Singapore. 
+      In contrast, less developed states like Kelantan and Terengganu receive fewer visitors. 
+    </p>
+    
 
-  <!-- FIRST DUAL CHART SECTION (Donut + Gender) -->
-  <h2>Tourist Arrivals Differ between Male and Female Visitors</h2>
-  <div class="dual-container">
-    <div class="chart-dual-box">
-      <div class="chart-wrapper"><div id="donut_chart"></div></div>
-    </div>
-    <div class="chart-dual-box">
-      <div class="chart-wrapper"><div id="gender_chart"></div></div>
-    </div>
-  </div>
+    <!-- FIRST DUAL CHART SECTION (Donut + Gender) -->
+    <h2>Tourist Demographics and Leading Destinations</h2>
+    <div class="dual-container">
+      <div class="chart-dual-box">
+        <div class="chart-wrapper"><div id="donut_chart"></div></div>
+        
+        <div class="annotation-box-donut">
+          <p>
+            A near balance between male and female tourists reflects equal 
+            participation in Malaysia's tourism sector
+          </p>
+        </div>
 
-  <!-- SECOND DUAL CHART SECTION (Top 5 + Yearly Trend) -->
-  <h2>Top 5 Tourist States and Yearly Arrival Trends</h2>
-  <div class="dual-container">
-    <div class="chart-dual-box">
-      <div class="chart-wrapper"><div id="top5_chart"></div></div>
+      </div>
+      <div class="chart-dual-box">
+        <div class="chart-wrapper"><div id="top5_gender_chart"></div></div>
+
+        <div class="annotation-box-stacked">
+          <p>
+            Tourist arrivals fluctuated across the years, rebounding after 2021. 
+            Johor and Selangor consistently drew the highest numbers of visitors.
+          </p>
+        </div>
+      </div>
     </div>
-    <div class="chart-dual-box">
-      <div class="chart-wrapper"><div id="yearly_trend_chart"></div></div>
+
+    <p class="subtitle">
+      Beyond geographic trends, it is important to understand who the visitors are and which states 
+      attract the most tourists. Major destinations benefit from strong infrastructure and accessibility, 
+      while smaller regions may need more focused promotion. The recovery in domestic mobility sets the stage for the historical overview that follows.
+    </p>
+
+    <!-- SECOND DUAL CHART SECTION (Top 5 + Yearly Trend) -->
+    <h2>Historical Overview — "How Tourism Evolved Over Time"</h2>
+    <div class="dual-container">
+      <div class="chart-dual-box">
+        <div class="chart-wrapper"><div id="top5_chart"></div></div>
+        <div class="annotation-box-bar">
+          <p>
+            China remains Malaysia's largest tourist source, followed by regional markets such as India and Japan.
+          </p>
+        </div>
+      </div>
+      <div class="chart-dual-box">
+        <div class="chart-wrapper"><div id="yearly_trend_chart"></div></div>
+        <div class="annotation-box-line">
+          <p>
+            Arrivals peaked in 2019 before collapsing in 2020 amid the COVID-19 outbreak.
+          </p>
+        </div>
+      </div>
     </div>
+
+    <p class="subtitle">
+      Malaysia's tourism expansion relied heavily on nearby Asian markets, reflecting strong regional connectivity. 
+      However, this dependence also exposed the sector to global disruptions, as seen in the sharp decline after 2019. 
+      This underscores the need for more balanced and sustainable tourism strategies moving forward.
+    </p>
+
+    <div class="footer-container">
+      <hr class="divider" />
+      <p class="authorship">
+        Authorship
+      </p>
+      <p class="info-text">
+        Author:&nbsp;Wong Jing Xuan
+      </p>
+      <p class="info-text">
+        Generated on: &nbsp;19 October 2025
+      </p>
+      <p class="info-text">
+        Data Sources:
+      </p>
+      <p class="info-text">
+        Government of Malaysia Open Data Portal - https://data.gov.my/data-catalogue/arrivals_soe
+      </p>
+      <p class="info-text">
+        Statistics Data Warehouse (dosm) - https://statsdw.dosm.gov.my/tourism/?utm_source
+      </p>
+    </div>
+
+    
   </div>
 
 
@@ -177,7 +380,7 @@
 
   <!-- Gender Bar Chart -->
   <script>
-    vegaEmbed("#gender_chart", "gender_chart.json", {
+    vegaEmbed("#top5_gender_chart", "top5_gender_chart.json", {
       actions: false,
       renderer: "canvas"
     })

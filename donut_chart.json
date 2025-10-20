@@ -1,32 +1,48 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": {
-    "text": "Gender Distribution of Arrivals",
-    "offset": 20
-  },
+  "title": {"text": "Gender Distribution of Arrivals", "offset": 20},
   "data": {"url": "gender_counts.csv"},
-  "mark": {
-    "type": "arc",
-    "tooltip": true,
-    "innerRadius": 70
-  },
-  "encoding": {
-    "theta": {"field": "Percent", "type": "quantitative"},
-    "color": {
-      "field": "Gender",
-      "type": "nominal",
-      "scale": {
-        "domain": ["Male", "Female"],
-        "range": ["#4A90E2", "#FF69B4"]
+  "width": 300,
+  "height": 300,
+  "view": {"stroke": null},
+  "layer": [
+    {
+      "mark": {"type": "arc", "innerRadius": 70, "tooltip": true},
+      "encoding": {
+        "theta": {"field": "Percent", "type": "quantitative"},
+        "color": {
+          "field": "Gender",
+          "type": "nominal",
+          "scale": {
+            "domain": ["Male", "Female"],
+            "range": ["#4A90E2", "#FF69B4"]
+          }
+        },
+        "tooltip": [
+          {"field": "Gender", "type": "nominal"},
+          {"field": "Count", "type": "quantitative", "format": ",", "title": "Arrivals"},
+          {"field": "Percent", "type": "quantitative", "title": "Percentage (%)"}
+        ]
       }
     },
-    "tooltip": [
-      {"field": "Gender", "type": "nominal"},
-      {"field": "Count", "type": "quantitative", "format": ",", "title": "Arrivals"},
-      {"field": "Percent", "type": "quantitative", "title": "Percentage (%)"}
-    ]
-  },
-  "view": {"stroke": null},
-  "width": 300,
-  "height": 300
+    {
+      "data": {
+        "values": [
+          {"text": "55.7%", "x": 130, "y": 160},  
+          {"text": "44.3%", "x": 220, "y": 140}   
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "fontSize": 14,
+        "fontWeight": "bold",
+        "color": "black"
+      },
+      "encoding": {
+        "text": {"field": "text"},
+        "x": {"field": "x", "axis": null},
+        "y": {"field": "y", "axis": null}
+      }
+    }
+  ]
 }

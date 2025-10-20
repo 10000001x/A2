@@ -1,0 +1,78 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {"text": "Top 5 States by Tourist Arrivals and Gender"},
+  "width": "container",
+  "height": 300,
+  "data": {"url": "arrivals_gender_top5.csv"},
+  "params": [
+    {
+      "name": "year_select",
+      "value": 2020,
+      "bind": {
+        "input": "select",
+        "options": [2020, 2021, 2022, 2023, 2024],
+        "labels": ["2020", "2021", "2022", "2023", "2024"],
+        "name": "Select Year: "
+      }
+    }
+  ],
+  "transform": [
+    {"filter": "datum.year == year_select"},
+    {"filter": "datum.rank <= 5"}
+  ],
+  "mark": {"type": "bar", "opacity": 0.9},
+  "encoding": {
+    "y": {
+      "field": "soe",
+      "type": "nominal",
+      "title": "Top 5 States",
+      "sort": "-x",
+      "axis": {"labelFontSize": 11,
+        "labelOverlap": false,
+        "labelFlush": false,
+        "labelBound": true,
+        "titlePadding": 10,
+        "labelLimit": 130}
+    },
+    "x": {
+      "field": "arrivals",
+      "type": "quantitative",
+      "title": "Total Arrivals (visitors)",
+      "stack": "zero",
+      "axis": {
+        "titleFontSize": 12, 
+        "format": "~s",
+        "titlePadding": 10}
+        },
+    "color": {
+      "field": "gender",
+      "type": "nominal",
+      "scale": {
+        "domain": ["Female", "Male"],
+        "range": ["#FF69B4", "#4A90E2"]
+      },
+      "legend": {"title": "Gender"}
+    },
+    "tooltip": [
+      {"field": "soe", "title": "State"},
+      {"field": "gender", "title": "Gender"},
+      {
+        "field": "arrivals",
+        "type": "quantitative",
+        "title": "Arrivals",
+        "format": ","
+      },
+      {"field": "year", "title": "Year"}
+    ]
+  },
+  "config": {
+    "view": {"stroke": "transparent"},
+    "axis": {
+      "domainColor": "#ddd",
+      "gridColor": "#f0f0f0",
+      "tickColor": "#ddd"
+    },
+    "padding":{"left": 20}
+
+  }
+}

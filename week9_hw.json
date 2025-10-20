@@ -1,52 +1,41 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": "Tourist Arrivals by States and Federal Territories in Malaysia",
+  "title": "",
   "width": 800,
   "height": 400,
-
   "view": {"stroke": "transparent", "fill": "#eaf4fc"},
 
   "layer": [
     {
       "data": {"graticule": {"step": [2, 2], "extent": [[98, -2], [122, 10]]}},
-      "mark": {"type": "geoshape", "stroke": "#ffffff", "strokeWidth": 0.5}
+      "mark": {"type": "geoshape", "stroke": "#d1cfcf", "strokeWidth": 0.5}
     },
     {
-
       "data": {
         "url": "https://10000001x.github.io/3179_HW9/ne_1.json",
-        "format": {
-          "type": "topojson",
-          "feature": "ne_10m_admin_1_states_provinces"  
-        }
+        "format": {"type": "topojson", "feature": "ne_10m_admin_1_states_provinces"}
       },
       "transform": [
         {
-          "lookup": "properties.name", 
+          "lookup": "properties.name",
           "from": {
             "data": {"url": "https://10000001x.github.io/3179_HW9/arrivals_by_state.csv"},
-            "key": "soe",                
+            "key": "soe",
             "fields": ["total_arrivals"]
           }
         },
+        {"calculate": "toNumber(datum.total_arrivals)", "as": "arrivals_num"},
+        {"calculate": "log(datum.total_arrivals + 1)", "as": "log_arrivals"},
         {
-            "calculate": "toNumber(datum.total_arrivals)",
-            "as": "arrivals_num"
-        },
-        {
-            "calculate": "log(datum.total_arrivals + 1)",
-            "as": "log_arrivals"
-        },
-        {
-            "window": [
+          "window": [
             {"op": "min", "field": "log_arrivals", "as": "min_arr"},
             {"op": "max", "field": "log_arrivals", "as": "max_arr"}
-            ],
-            "frame": [null, null]
+          ],
+          "frame": [null, null]
         },
         {
-            "calculate": "(datum.log_arrivals - datum.min_arr) / (datum.max_arr - datum.min_arr)",
-            "as": "arrivals_norm"
+          "calculate": "(datum.log_arrivals - datum.min_arr) / (datum.max_arr - datum.min_arr)",
+          "as": "arrivals_norm"
         }
       ],
       "mark": {"type": "geoshape"},
@@ -54,14 +43,13 @@
         "color": {
           "field": "arrivals_norm",
           "type": "quantitative",
-          "scale": {"scheme": "purples", "type": "linear"},
+          "scale": {"scheme": "purples", "type": "quantile"},
           "title": "Normalized Arrivals"
         },
         "tooltip": [
-          {"field": "properties.name", "title": "State"},
-          {"field": "arrivals_num", "title": "Raw Arrivals"},
-          {"field": "arrivals_norm", "title": "Normalized Arrivals", "format": ".2f"},
-          {"field": "log_arrivals", "title": "Log Arrivals", "format": ".2f"}
+          {"field": "properties.name", "title": "State:"},
+          {"field": "arrivals_num", "title": "Total Arrivals:", "format": ","},
+          {"field": "arrivals_norm", "title": "Normalized Arrivals:", "format": ".2f"}
         ]
       },
       "projection": {"type": "identity", "reflectY": true}
@@ -69,36 +57,23 @@
     {
       "data": {
         "url": "https://10000001x.github.io/3179_HW9/ne_1.json",
-        "format": {
-          "type": "topojson",
-          "feature": "ne_10m_admin_1_states_provinces"
-        }
+        "format": {"type": "topojson", "feature": "ne_10m_admin_1_states_provinces"}
       },
       "transform": [
         {
           "lookup": "properties.name",
           "from": {
-            "data": {
-              "url": "https://10000001x.github.io/3179_HW9/arrivals_by_state.csv"
-            },
+            "data": {"url": "https://10000001x.github.io/3179_HW9/arrivals_by_state.csv"},
             "key": "soe",
             "fields": ["total_arrivals"]
           }
         },
-        { "calculate": "toNumber(datum.total_arrivals)", "as": "arrivals_num" },
-        {
-          "window": [{ "op": "rank", "as": "rank" }],
-          "sort": [{ "field": "arrivals_num", "order": "descending" }]
-        },
-        { "filter": "datum.rank <= 3" }
+        {"calculate": "toNumber(datum.total_arrivals)", "as": "arrivals_num"},
+        {"window": [{"op": "rank", "as": "rank"}], "sort": [{"field": "arrivals_num", "order": "descending"}]},
+        {"filter": "datum.rank <= 3"}
       ],
-      "mark": {
-        "type": "geoshape",
-        "stroke": "#ff6b6b",
-        "strokeWidth": 2,
-        "fill": null
-      },
-      "projection": { "type": "identity", "reflectY": true }
+      "mark": {"type": "geoshape", "stroke": "#ff6b6b", "strokeWidth": 2, "fill": null},
+      "projection": {"type": "identity", "reflectY": true}
     },
     {
       "data": {"values": [{}]},
@@ -108,14 +83,58 @@
         "baseline": "bottom",
         "dx": -10,
         "dy": -10,
-        "fontSize": 12,
+        "fontSize": 15,
         "fontStyle": "italic",
         "fill": "#555"
       },
       "encoding": {
-        "x": { "value": 800 },
-        "y": { "value": 400 },
+        "x": {"value": 800},
+        "y": {"value": 400},
         "text": {"value": "Top 3 states are outlined in red borders"}
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {"state": "Johor", "arrivals": "47,730,355", "longitude": 104.4, "latitude": 1.7},
+          {"state": "Selangor", "arrivals": "20,857,446", "longitude": 99.4, "latitude": 3.1},
+          {"state": "Sarawak", "arrivals": "4,593,298", "longitude": 112.5, "latitude": 1.0}
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 6,
+        "dy": 0,
+        "fontSize": 12,
+        "fontWeight": "bold"
+      },
+      "encoding": {
+        "longitude": {"field": "longitude", "type": "quantitative"},
+        "latitude": {"field": "latitude", "type": "quantitative"},
+        "text": {"field": "state", "type": "nominal"}
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {"state": "Johor", "arrivals": "47M", "longitude": 104.5, "latitude": 1.55},
+          {"state": "Selangor", "arrivals": "20M", "longitude": 99.6, "latitude": 2.95},
+          {"state": "Sarawak", "arrivals": "4M", "longitude": 112.8, "latitude": 0.90}
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 6,
+        "dy": 10,
+        "fontSize": 12,
+        "fontWeight": "bold"
+      },
+      "encoding": {
+        "longitude": {"field": "longitude", "type": "quantitative"},
+        "latitude": {"field": "latitude", "type": "quantitative"},
+        "text": {"field": "arrivals", "type": "nominal"}
       }
     }
   ]
