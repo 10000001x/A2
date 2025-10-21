@@ -28,14 +28,16 @@
       width: 95%;
       max-width: 1200px;
       margin: 0 auto;
-      padding: 40px 50px;
+      margin-top: 80px;
+      margin-bottom: 80px;
+      padding: 40px 50px;;
       box-sizing: border-box;
       border: 1px solid #e5d4ff;
     }
 
     h1 {
       text-align: center;
-      margin-top: 10px;
+      margin-top: 40px;
       margin-bottom: 5px;
       font-size: 55px;
       font-weight: bold;
@@ -46,8 +48,8 @@
     p.subtitle {
       text-align: justify;
       width: 90%;                        /* same width as your chart boxes */
-      max-width: 980px; 
-      margin: 0 auto 25px auto;
+      max-width: 800px;                 /* consistent with .chart-box */
+      margin: 15px auto 35px auto;
       color: #555;
       font-size: 25px;
       font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -146,6 +148,7 @@
     .chart-wrapper {
       width: 95%; 
       height: 100%;
+      position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -154,9 +157,9 @@
 
     .annotation-box-donut {
       position: absolute;
-      bottom: -650px;                        /* adjust vertically */
-      left: 580px;                           /* adjust horizontally */
-      width: 130px;
+      top: 30%;                        /* adjust vertically */
+      left: 72%;                           /* adjust horizontally */
+      width: 115px;
       background-color: rgba(255, 255, 255, 0.9);
       padding: 0px 10px;
       border: 1px solid #ddd;
@@ -172,8 +175,8 @@
 
     .annotation-box-stacked {
       position: absolute;
-      bottom: -610px;                        /* adjust vertically */
-      left: 1050px;                           /* adjust horizontally */
+      top: 30%;                        /* adjust vertically */
+      left: 60%;                           /* adjust horizontally */
       width: 140px;
       background-color: rgba(255, 255, 255, 0.9);
       padding: 0px 10px;
@@ -190,8 +193,8 @@
 
     .annotation-box-bar {
       position: absolute;
-      bottom: -1150px;                        /* adjust vertically */
-      left: 580px;                           /* adjust horizontally */
+      top: 10%;                        /* adjust vertically */
+      left: 65%;                           /* adjust horizontally */
       width: 140px;
       background-color: rgba(255, 255, 255, 0.9);
       padding: 0px 10px;
@@ -208,8 +211,8 @@
 
     .annotation-box-line {
       position: absolute;
-      bottom: -1230px;                        /* adjust vertically */
-      left: 1000px;                           /* adjust horizontally */
+      top: 50%;                        /* adjust vertically */
+      left: 48%;                           /* adjust horizontally */
       width: 155px;
       background-color: rgba(255, 255, 255, 0.9);
       padding: 0px 10px;
@@ -264,9 +267,11 @@
     <p class="subtitle">
       Tourism plays a vital role in Malaysia's economy, culture, and regional development.
       Over the years, the country has welcomed millions of visitors drawn by its diverse landscapes, 
-      rich heritage, and growing modern attractions. 
-      Let's begin with an overview of where tourists travel most within Malaysia!
+      rich heritage, and growing modern attractions. Let's begin with an overview of where tourists travel most within Malaysia!
     </p>
+    <!-- <p class="subtitle">
+      Let's begin with an overview of where tourists travel most within Malaysia!
+    </p> -->
 
     <!-- MAP SECTION -->
     <h2>Tourist Arrival Patterns Across Malaysia</h2>
@@ -284,24 +289,25 @@
     <h2>Tourist Demographics and Leading Destinations</h2>
     <div class="dual-container">
       <div class="chart-dual-box">
-        <div class="chart-wrapper"><div id="donut_chart"></div></div>
-        
-        <div class="annotation-box-donut">
-          <p>
-            A near balance between male and female tourists reflects equal 
-            participation in Malaysia's tourism sector
-          </p>
+        <div class="chart-wrapper">
+          <div id="donut_chart"></div>
+          <div class="annotation-box-donut">
+            <p>
+              A near balance between male and female tourists reflects equal 
+              participation in Malaysia's tourism sector
+            </p>
+          </div>
         </div>
-
       </div>
       <div class="chart-dual-box">
-        <div class="chart-wrapper"><div id="top5_gender_chart"></div></div>
-
-        <div class="annotation-box-stacked">
-          <p>
-            Tourist arrivals fluctuated across the years, rebounding after 2021. 
-            Johor and Selangor consistently drew the highest numbers of visitors.
-          </p>
+        <div class="chart-wrapper">
+          <div id="top5_gender_chart"></div>
+          <div class="annotation-box-stacked">
+            <p>
+              Tourist arrivals fluctuated across the years, rebounding after 2021. 
+              Johor and Selangor consistently drew the highest numbers of visitors.
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -316,19 +322,23 @@
     <h2>Historical Overview — "How Tourism Evolved Over Time"</h2>
     <div class="dual-container">
       <div class="chart-dual-box">
-        <div class="chart-wrapper"><div id="top5_chart"></div></div>
-        <div class="annotation-box-bar">
-          <p>
-            China remains Malaysia's largest tourist source, followed by regional markets such as India and Japan.
-          </p>
+        <div class="chart-wrapper">
+          <div id="top5_chart"></div>
+          <div class="annotation-box-bar">
+            <p>
+              China remains Malaysia's largest tourist source, followed by regional markets such as India and Japan.
+            </p>
+          </div>
         </div>
       </div>
       <div class="chart-dual-box">
-        <div class="chart-wrapper"><div id="yearly_trend_chart"></div></div>
-        <div class="annotation-box-line">
-          <p>
-            Arrivals peaked in 2019 before collapsing in 2020 amid the COVID-19 outbreak.
-          </p>
+        <div class="chart-wrapper">
+          <div id="yearly_trend_chart"></div>
+          <div class="annotation-box-line">
+            <p>
+              Arrivals peaked in 2019 before collapsing in 2020 amid the COVID-19 outbreak.
+            </p>
+          </div>
         </div>
       </div>
     </div>
