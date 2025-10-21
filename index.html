@@ -38,7 +38,7 @@
     h1 {
       text-align: center;
       margin-top: 40px;
-      margin-bottom: 5px;
+      margin-bottom: 20px;
       font-size: 55px;
       font-weight: bold;
       font-family: 'Times New Roman', Times, serif;
@@ -48,12 +48,39 @@
     p.subtitle {
       text-align: justify;
       width: 90%;                        /* same width as your chart boxes */
-      max-width: 800px;                 /* consistent with .chart-box */
+      max-width: 980px;                 /* consistent with .chart-box */
       margin: 15px auto 35px auto;
       color: #555;
       font-size: 25px;
       font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     }
+
+    .subtitle-split {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      flex-wrap: wrap;         /* makes it stack nicely on small screens */
+      gap: 25px;               /* spacing between the two blocks */
+      width: 90%;
+      max-width: 980px;
+      margin: 0 auto 30px auto;
+    }
+
+    .split-block {
+      flex: 1;
+      min-width: 300px;
+      max-width: 500px;
+    }
+
+    .split-block p {
+      color: #555;
+      font-size: 22.5px;
+      line-height: 1.6;
+      text-align: justify;
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      margin: 0;
+    }
+
 
     h2 {
       text-align: center;
@@ -264,25 +291,41 @@
 <body>
   <div class="outer-box">
     <h1>Tourism in Malaysia</h1>
-    <p class="subtitle">
-      Tourism plays a vital role in Malaysia's economy, culture, and regional development.
-      Over the years, the country has welcomed millions of visitors drawn by its diverse landscapes, 
-      rich heritage, and growing modern attractions. Let's begin with an overview of where tourists travel most within Malaysia!
-    </p>
-    <!-- <p class="subtitle">
-      Let's begin with an overview of where tourists travel most within Malaysia!
-    </p> -->
+    <div class="subtitle-split">
+      <div class="split-block">
+        <p>
+          Tourism plays a vital role in Malaysia's economy, culture, and regional development.
+          It not only generates income and employment but also strengthens social and cultural ties across regions.
+        </p>
+      </div>
+      <div class="split-block">
+        <p>
+          Over the years, the country has welcomed millions of visitors with its diverse landscapes, 
+          heritage, and modern attractions. Let's begin with an overview of where tourists travel most within Malaysia!
+        </p>
+      </div>
+    </div>
+
 
     <!-- MAP SECTION -->
     <h2>Tourist Arrival Patterns Across Malaysia</h2>
     <div class="chart-container">
       <div id="msia_map" class="chart-box"></div>
     </div>
-    <p class="subtitle">
-      Tourism in Malaysia remains focused on urban and coastal regions, while other areas still have room to grow.
-      States like Johor attract more tourists due to strong transport links and proximity to Singapore. 
-      In contrast, less developed states like Kelantan and Terengganu receive fewer visitors. 
-    </p>
+    <div class="subtitle-split">
+      <div class="split-block">
+        <p>
+          Tourism in Malaysia remains focused on urban and coastal regions,
+          while other areas still have room to grow. Although Sarawak ranks among the top three, its arrivals are far lower than the other two.
+        </p>
+      </div>
+      <div class="split-block">
+        <p>
+          States like Johor attract more tourists due to strong transport links and proximity to Singapore. 
+          In contrast, less developed states like Kelantan and Terengganu receive fewer visitors. 
+        </p>
+      </div>
+    </div>
     
 
     <!-- FIRST DUAL CHART SECTION (Donut + Gender) -->
@@ -312,11 +355,20 @@
       </div>
     </div>
 
-    <p class="subtitle">
-      Beyond geographic trends, it is important to understand who the visitors are and which states 
-      attract the most tourists. Major destinations benefit from strong infrastructure and accessibility, 
-      while smaller regions may need more focused promotion. The recovery in domestic mobility sets the stage for the historical overview that follows.
-    </p>
+    <div class="subtitle-split">
+      <div class="split-block">
+        <p>
+          Beyond geographic trends, it is important to understand who the visitors are and which states 
+          attract the most tourists. Major destinations benefit from strong infrastructure and accessibility.
+        </p>
+      </div>
+      <div class="split-block">
+        <p>
+          Meanwhile, smaller regions may need more focused promotion to increase the number of tourists arrivals.  
+          The recovery in domestic mobility sets the stage for the historical overview that follows.
+        </p>
+      </div>
+    </div>
 
     <!-- SECOND DUAL CHART SECTION (Top 5 + Yearly Trend) -->
     <h2>Historical Overview — "How Tourism Evolved Over Time"</h2>
@@ -343,11 +395,20 @@
       </div>
     </div>
 
-    <p class="subtitle">
-      Malaysia's tourism expansion relied heavily on nearby Asian markets, reflecting strong regional connectivity. 
-      However, this dependence also exposed the sector to global disruptions, as seen in the sharp decline after 2019. 
-      This underscores the need for more balanced and sustainable tourism strategies moving forward.
-    </p>
+    <div class="subtitle-split">
+      <div class="split-block">
+        <p>
+          Malaysia's tourism expansion relied heavily on nearby Asian markets, reflecting strong regional connectivity.
+          While visitors also came from other countries, these regional sources remained the main contributors. 
+        </p>
+      </div>
+      <div class="split-block">
+        <p>
+          However, this dependence also exposed the sector to global disruptions, as seen in the sharp decline after 2019. 
+          This underscores the need for more balanced and sustainable tourism strategies moving forward.
+        </p>
+      </div>
+    </div>
 
     <div class="footer-container">
       <hr class="divider" />
